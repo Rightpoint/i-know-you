@@ -24,11 +24,11 @@ module.exports = {
             {
                 test: /\.jsx?$/,
                 include: [
-                    path.resolve(__dirname, "app")
+                    path.resolve(__dirname, "src")
                 ],
-                exclude: [
-                    path.resolve(__dirname, "app/demo-files")
-                ],
+                // exclude: [
+                //     path.resolve(__dirname, "app/demo-files")
+                // ],
                 // these are matching conditions, each accepting a regular expression or string
                 // test and include have the same behavior, both must be matched
                 // exclude must not be matched (takes preferrence over test and include)
@@ -36,17 +36,17 @@ module.exports = {
                 // - Use RegExp only in test and for filename matching
                 // - Use arrays of absolute paths in include and exclude
                 // - Try to avoid exclude and prefer include
-                issuer: { test, include, exclude },
+                // issuer: { test, include, exclude },
                 // conditions for the issuer (the origin of the import)
-                enforce: "pre",
-                enforce: "post",
+                // enforce: "pre",
+                // enforce: "post",
                 // flags to apply these rules, even if they are overridden (advanced option)
                 loader: "babel-loader",
                 // the loader which should be applied, it'll be resolved relative to the context
                 // -loader suffix is no longer optional in webpack2 for clarity reasons
                 // see webpack 1 upgrade guide
                 options: {
-                    presets: ["es2015"]
+                    presets: ["env"]
                 },
                 // options for the loader
             },
@@ -62,18 +62,7 @@ module.exports = {
                         }
                     }
                 ]
-            },
-            { oneOf: [ /* rules */] },
-            // only use one of these nested rules
-            { rules: [ /* rules */] },
-            // use all of these nested rules (combine with conditions to be useful)
-            { resource: { and: [ /* conditions */] } },
-            // matches only if all conditions are matched
-            { resource: { or: [ /* conditions */] } },
-            { resource: [ /* conditions */] },
-            // matches if any condition is matched (default for arrays)
-            { resource: { not: /* condition */ } }
-            // matches if the condition is not matched
+            }
         ],
         /* Advanced module configuration (click to show) */
 },
@@ -82,7 +71,7 @@ module.exports = {
         // (does not apply to resolving to loaders)
         modules: [
             "node_modules",
-            path.resolve(__dirname, "app")
+            path.resolve(__dirname, "src")
         ],
         // directories where to look for modules
         extensions: [".js", ".json", ".jsx", ".css"],
@@ -93,7 +82,7 @@ module.exports = {
             // alias "module" -> "new-module" and "module/path/file" -> "new-module/path/file"
             "only-module$": "new-module",
             // alias "only-module" -> "new-module", but not "only-module/path/file" -> "new-module/path/file"
-            "module": path.resolve(__dirname, "app/third/module.js"),
+            "module": path.resolve(__dirname, "src/third/module.js"),
             // alias "module" -> "./app/third/module.js" and "module/file" results in error
             // modules aliases are imported relative to the current context
         },
