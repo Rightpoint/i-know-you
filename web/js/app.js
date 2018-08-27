@@ -1,13 +1,17 @@
 (function () {
-    var canvas = document.getElementById('canvas');
-    var context = canvas.getContext('2d');
+    var liveVideo = document.getElementById('live-video');
+    var videoOverlay = document.getElementById('video-overlay');
+    var videoOverlayContext = videoOverlay.getContext('2d');
+
+    var videoSnapshot = document.getElementById('video-snapshot');
+    var videoSnapshotContext = videoSnapshot.getContext('2d');
 
     var tracker = new tracking.ObjectTracker('face');
     tracker.setInitialScale(4);
     tracker.setStepSize(2);
     tracker.setEdgesDensity(0.1);
 
-    tracking.track('#video', tracker, { camera: true });
+    tracking.track('#live-video', tracker, { camera: true });
 
     var trackerEnabled = true;
     tracker.on('track', handleTrackerEvent);
@@ -26,16 +30,19 @@
 
             // output face data
             event.data.forEach(function (data) {
-                context.clearRect(0, 0, canvas.width, canvas.height);
+                videoOverlayContext.clearRect(0, 0, videoOverlay.width, videoOverlay.height);
                 event.data.forEach(function (rect) {
-                    context.strokeStyle = '#a64ceb';
-                    context.strokeRect(rect.x, rect.y, rect.width, rect.height);
-                    context.font = '11px Helvetica';
-                    context.fillStyle = "#fff";
-                    context.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
-                    context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
+                    videoOverlayContext.strokeStyle = '#a64ceb';
+                    videoOverlayContext.strokeRect(rect.x, rect.y, rect.width, rect.height);
+                    videoOverlayContext.font = '11px Helvetica';
+                    videoOverlayContext.fillStyle = "#fff";
+                    videoOverlayContext.fillText('x: ' + rect.x + 'px', rect.x + rect.width + 5, rect.y + 11);
+                    videoOverlayContext.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
                 });
             });
+
+            // draw snapshot
+            videoSnapshotContext.drawImage(liveVideo, 0, 0, videoOverlay.width, videoOverlay.height);
 
             // re-enable tracker after 3 seconds
             console.log('scheduling tracker in 3 seconds');

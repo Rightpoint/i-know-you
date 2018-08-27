@@ -6,8 +6,12 @@
   <title>Face Tracking POC</title>
 
   <style>
-    video,
-    canvas {
+    .container {
+      position: relative;
+    }
+
+    #live-video,
+    #video-overlay {
       margin-left: 230px;
       margin-top: 120px;
       position: absolute;
@@ -16,11 +20,12 @@
 </head>
 
 <body>
-  <div className="demo-frame">
-    <div className="demo-container">
-      <video id="video" width="320" height="240" preload="true" autoPlay loop muted></video>
-      <canvas id="canvas" width="320" height="240"></canvas>
-    </div>
+  <div class="container live-video-container">
+    <video id="live-video" width="320" height="240" preload="true" autoplay loop muted></video>
+    <canvas id="video-overlay" width="320" height="240"></canvas>
+  </div>
+  <div class="container snapshot-container">
+    <canvas id="video-snapshot" width="320" height="240"></canvas>
   </div>
 
   <script src="js/tracking.js"></script>
