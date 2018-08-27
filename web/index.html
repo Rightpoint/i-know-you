@@ -36,14 +36,24 @@
     tracker.setStepSize(2);
     tracker.setEdgesDensity(0.1);
 
-    var trackerTask = tracking.track('#video', tracker, { camera: true });
+    tracking.track('#video', tracker, { camera: true });
 
-    tracker.on('track', function (event) {
+    var trackerEnabled = true;
+    tracker.on('track', handleTrackerEvent);
+
+    function handleTrackerEvent(event) {
+      if (!trackerEnabled) return;
+
       if (event.data.length === 0) {
-        // No faces were detected in this frame.
+        // no faces were detected in this frame.
       } else {
-        trackerTask.stop();
-        
+        console.log('found a face!');
+
+        // disable tracker
+        trackerEnabled = false;
+        console.log('tracker disabled');
+
+        // output face data
         event.data.forEach(function (data) {
           context.clearRect(0, 0, canvas.width, canvas.height);
           event.data.forEach(function (rect) {
@@ -55,8 +65,14 @@
             context.fillText('y: ' + rect.y + 'px', rect.x + rect.width + 5, rect.y + 22);
           });
         });
+
+        // re-enable tracker after 3 seconds
+        console.log('scheduling tracker in 3 seconds');
+        setTimeout(function () {
+          trackerEnabled = true;
+        }, 3000);
       }
-    });
+    }
   </script>
 </body>
 
