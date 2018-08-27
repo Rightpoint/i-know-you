@@ -1,6 +1,8 @@
 # I Know You - Web
 This is the front-end application for the I Know You computer vision POC.
 
+Source documentation: [https://trackingjs.com/docs.html#trackers](https://trackingjs.com/docs.html#trackers)
+
 ## Deployment
 This is a static site that is served from [Azure Storage](https://docs.microsoft.com/en-us/azure/storage/blobs/storage-blob-static-website).
 
