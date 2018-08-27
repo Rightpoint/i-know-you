@@ -22,11 +22,11 @@
         if (event.data.length === 0) {
             // no faces were detected in this frame.
         } else {
-            console.log('found a face!');
+            log('found a face!');
 
             // disable tracker
             trackerEnabled = false;
-            console.log('tracker disabled');
+            log('tracker disabled');
 
             // output face data
             event.data.forEach(function (data) {
@@ -45,14 +45,22 @@
             videoSnapshotContext.drawImage(liveVideo, 0, 0, videoOverlay.width, videoOverlay.height);
 
             // re-enable tracker after 3 seconds
-            console.log('scheduling tracker in 3 seconds');
+            log('scheduling tracker in 3 seconds');
             setTimeout(function () {
                 videoOverlayContext.clearRect(0, 0, videoOverlay.width, videoOverlay.height);
                 videoSnapshotContext.clearRect(0, 0, videoSnapshot.width, videoSnapshot.height);
 
                 trackerEnabled = true;
-                console.log('tracker watching...');
+                log('tracker watching...');
             }, 3000);
         }
+    }
+
+    var consoleWindow = document.getElementById('console');
+    function log(message){
+        console.log(message);
+
+        // log from top down
+        consoleWindow.innerHTML = new Date().getTime() + ' - ' + message + '<br />' + consoleWindow.innerHTML;
     }
 }())
