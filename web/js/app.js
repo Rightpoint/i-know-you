@@ -41,6 +41,7 @@
             console.log('scheduling tracker in 3 seconds');
             setTimeout(function () {
                 trackerEnabled = true;
+                console.log('tracker watching...');
             }, 3000);
         }
     }
