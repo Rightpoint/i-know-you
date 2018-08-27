@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 // configuration source: https://www.robinwieruch.de/minimal-react-webpack-babel-setup/
 module.exports = {
@@ -21,6 +22,11 @@ module.exports = {
         filename: 'bundle.js'
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            hash: true,
+            filename: './index.html',
+            title: 'The Minimal React Webpack Babel Setup'
+        }),
         new webpack.HotModuleReplacementPlugin()
     ],
     devServer: {
