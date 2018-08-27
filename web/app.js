@@ -47,6 +47,9 @@
             // re-enable tracker after 3 seconds
             console.log('scheduling tracker in 3 seconds');
             setTimeout(function () {
+                videoOverlayContext.clearRect(0, 0, videoOverlay.width, videoOverlay.height);
+                videoSnapshotContext.clearRect(0, 0, videoSnapshot.width, videoSnapshot.height);
+
                 trackerEnabled = true;
                 console.log('tracker watching...');
             }, 3000);
