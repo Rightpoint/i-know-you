@@ -5,24 +5,7 @@
   <meta charset="UTF-8">
   <title>Face Tracking POC</title>
 
-  <style>
-    .container {
-      position: relative;
-    }
-
-    #live-video,
-    #video-overlay {
-      margin-left: 230px;
-      margin-top: 120px;
-      position: absolute;
-    }
-
-    #video-snapshot {
-      margin-left: 600px;
-      margin-top: 120px;
-      position: absolute;
-    }
-  </style>
+  <link rel="stylesheet" type="text/css" href="app.css">
 </head>
 
 <body>
@@ -34,9 +17,9 @@
     <canvas id="video-snapshot" width="320" height="240"></canvas>
   </div>
 
-  <script src="js/tracking.js"></script>
-  <script src="js/data/face.js"></script>
-  <script src="js/app.js"></script>
+  <script src="libs/tracking.js"></script>
+  <script src="libs/data/face.js"></script>
+  <script src="app.js"></script>
 </body>
 
 </html>
