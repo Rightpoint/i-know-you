@@ -1,9 +1,24 @@
 (function () {
+
+    var videoWidth = "640"; // potential: window.innerWidth;
+    var videoHeight = "480"; // potential: window.innerHeight;
+    var snapshotWidth = "320";
+    var snapshotHeight = "240";
+
     var liveVideo = document.getElementById('live-video');
+    liveVideo.setAttribute("width", videoWidth);
+    liveVideo.setAttribute("height", videoHeight);
+
     var videoOverlay = document.getElementById('video-overlay');
+    videoOverlay.setAttribute("width", videoWidth);
+    videoOverlay.setAttribute("height", videoHeight);
+
     var videoOverlayContext = videoOverlay.getContext('2d');
 
     var videoSnapshot = document.getElementById('video-snapshot');
+    videoSnapshot.setAttribute("width", snapshotWidth);
+    videoSnapshot.setAttribute("height", snapshotHeight);
+
     var videoSnapshotContext = videoSnapshot.getContext('2d');
 
     var tracker = new tracking.ObjectTracker('face');
@@ -42,7 +57,7 @@
             });
 
             // draw snapshot
-            videoSnapshotContext.drawImage(liveVideo, 0, 0, videoOverlay.width, videoOverlay.height);
+            videoSnapshotContext.drawImage(liveVideo, 0, 0, (videoOverlay.width / 2), (videoOverlay.height / 2));
 
             // re-enable tracker after 3 seconds
             log('scheduling tracker in 3 seconds');
