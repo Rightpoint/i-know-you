@@ -7,17 +7,18 @@
 
   <link rel="stylesheet" type="text/css" href="app.css">
 </head>
+
 <body>
-  <div class="container">
-    <div class="container live-video-container">
-      <video id="live-video" preload="true" autoplay loop muted></video>
-      <canvas id="video-overlay"></canvas>
-    </div>
-    <div class="container snapshot-container">
-      <canvas id="video-snapshot"></canvas>
-    </div>
-    <div id="console">
-    </div>
+  <div class="container live-video-container">
+    <video id="live-video" preload="true" autoplay loop muted></video>
+    <canvas id="video-overlay"></canvas>
+  </div>
+  <div class="container snapshot-container">
+    <canvas id="video-snapshot"></canvas>
+  </div>
+  <div id="console"></div>
+  <div class="btn-fullscreen-container">
+    <btn id="btn-fullscreen">Full Screen</btn>
   </div>
 
   <script src="libs/tracking.js"></script>

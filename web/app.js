@@ -1,25 +1,34 @@
 (function () {
 
-    var videoWidth = "640"; // potential: window.innerWidth;
-    var videoHeight = "480"; // potential: window.innerHeight;
-    var snapshotWidth = "320";
-    var snapshotHeight = "240";
+    var aspectRatio = (1+(1/3));
 
     var liveVideo = document.getElementById('live-video');
-    liveVideo.setAttribute("width", videoWidth);
-    liveVideo.setAttribute("height", videoHeight);
-
+    liveVideo.setAttribute("height", window.innerHeight);
+     
     var videoOverlay = document.getElementById('video-overlay');
-    videoOverlay.setAttribute("width", videoWidth);
-    videoOverlay.setAttribute("height", videoHeight);
+    videoOverlay.setAttribute("width", aspectRatio * window.innerHeight);
+    videoOverlay.setAttribute("height", window.innerHeight);
 
     var videoOverlayContext = videoOverlay.getContext('2d');
 
     var videoSnapshot = document.getElementById('video-snapshot');
-    videoSnapshot.setAttribute("width", snapshotWidth);
-    videoSnapshot.setAttribute("height", snapshotHeight);
+    videoSnapshot.setAttribute("width", (aspectRatio * (window.innerHeight / 3)));
+    videoSnapshot.setAttribute("height", window.innerHeight / 3);
 
     var videoSnapshotContext = videoSnapshot.getContext('2d');
+
+    window.onresize = function(){
+        liveVideo.setAttribute("height",     window.innerHeight);
+        videoOverlay.setAttribute("width",   (aspectRatio * window.innerHeight));
+        videoOverlay.setAttribute("height",  window.innerHeight);
+        videoSnapshot.setAttribute("width",  (aspectRatio * (window.innerHeight / 3)));
+        videoSnapshot.setAttribute("height", window.innerHeight / 3);
+    }
+
+    var btn = document.getElementById("btn-fullscreen");
+    btn.onclick = function() {
+        document.getElementById('live-video').webkitRequestFullScreen();
+      }
 
     var tracker = new tracking.ObjectTracker('face');
     tracker.setInitialScale(4);
@@ -57,7 +66,7 @@
             });
 
             // draw snapshot
-            videoSnapshotContext.drawImage(liveVideo, 0, 0, (videoOverlay.width / 2), (videoOverlay.height / 2));
+            videoSnapshotContext.drawImage(liveVideo, 0, 0, (videoOverlay.width / 3), (videoOverlay.height / 3));
 
             // re-enable tracker after 3 seconds
             log('scheduling tracker in 3 seconds');
@@ -67,7 +76,7 @@
 
                 trackerEnabled = true;
                 log('tracker watching...');
-            }, 3000);
+            }, 300);
         }
     }
 
