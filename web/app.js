@@ -76,7 +76,7 @@
 
                 trackerEnabled = true;
                 log('tracker watching...');
-            }, 300);
+            }, 3000);
         }
     }
 
