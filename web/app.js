@@ -1,34 +1,21 @@
 (function () {
-
-    var aspectRatio = (1+(1/3));
-
     var liveVideo = document.getElementById('live-video');
-    liveVideo.setAttribute("height", window.innerHeight);
-     
     var videoOverlay = document.getElementById('video-overlay');
-    videoOverlay.setAttribute("width", aspectRatio * window.innerHeight);
-    videoOverlay.setAttribute("height", window.innerHeight);
-
     var videoOverlayContext = videoOverlay.getContext('2d');
 
     var videoSnapshot = document.getElementById('video-snapshot');
-    videoSnapshot.setAttribute("width", (aspectRatio * (window.innerHeight / 3)));
-    videoSnapshot.setAttribute("height", window.innerHeight / 3);
-
     var videoSnapshotContext = videoSnapshot.getContext('2d');
 
-    window.onresize = function(){
-        liveVideo.setAttribute("height",     window.innerHeight);
-        videoOverlay.setAttribute("width",   (aspectRatio * window.innerHeight));
-        videoOverlay.setAttribute("height",  window.innerHeight);
-        videoSnapshot.setAttribute("width",  (aspectRatio * (window.innerHeight / 3)));
-        videoSnapshot.setAttribute("height", window.innerHeight / 3);
+    var aspectRatio = (1 + (1 / 3));
+    setScreenSize(liveVideo, videoOverlay, videoSnapshot, window.innerHeight, aspectRatio);
+    window.onresize = function () {
+        setScreenSize(liveVideo, videoOverlay, videoSnapshot, window.innerHeight, aspectRatio);
     }
 
     var btn = document.getElementById("btn-fullscreen");
-    btn.onclick = function() {
-        document.getElementById('live-video').webkitRequestFullScreen();
-      }
+    btn.onclick = function () {
+        liveVideo.webkitRequestFullScreen();
+    }
 
     var tracker = new tracking.ObjectTracker('face');
     tracker.setInitialScale(4);
@@ -81,10 +68,20 @@
     }
 
     var consoleWindow = document.getElementById('console');
-    function log(message){
+    function log(message) {
         console.log(message);
 
         // log from top down
         consoleWindow.innerHTML = new Date().getTime() + ' - ' + message + '<br />' + consoleWindow.innerHTML;
     }
+
+    function setScreenSize(liveVideo, videoOverlay, videoSnapshot, size, aspectRatio) {
+        liveVideo.setAttribute("height", size);
+        videoOverlay.setAttribute("width", (aspectRatio * size));
+        videoOverlay.setAttribute("height", size);
+        videoSnapshot.setAttribute("width", (aspectRatio * (size / 3)));
+        videoSnapshot.setAttribute("height", size / 3);
+    }
+
+
 }())
