@@ -1,21 +1,76 @@
-.container {
-    position: relative;
-  }
+body{
+  background: black;
+}
 
   #live-video,
   #video-overlay {
-    margin-left: 230px;
-    margin-top: 120px;
+    left: 0;
+    right: 0;
+    margin: auto;
     position: absolute;
+  }
+
+  #video-overlay{
+    z-index: 2147483647;
   }
 
   #video-snapshot {
-    margin-left: 600px;
-    margin-top: 120px;
+    right: 0;
+    bottom: 0;
+    margin: auto 1% 1% auto;
     position: absolute;
+    z-index: 2147483647;
   }
 
   #console {
-    height: 400px;
+    color: white;
+    background-color: black;
+    width: 20%;
+    height: 50%;
     overflow: scroll;
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 10px auto auto 10px;
+    z-index: -1;
   }
+
+  /* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+
+.btn-fullscreen-container{
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: auto auto 10px 10px;
+}
+
+btn {
+  background-color: whitesmoke;
+  border: none;
+  color: black;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}

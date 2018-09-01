@@ -10,13 +10,15 @@
 
 <body>
   <div class="container live-video-container">
-    <video id="live-video" width="320" height="240" preload="true" autoplay loop muted></video>
-    <canvas id="video-overlay" width="320" height="240"></canvas>
+    <video id="live-video" preload="true" autoplay loop muted></video>
+    <canvas id="video-overlay"></canvas>
   </div>
   <div class="container snapshot-container">
-    <canvas id="video-snapshot" width="320" height="240"></canvas>
+    <canvas id="video-snapshot"></canvas>
   </div>
-  <div id="console">
+  <div id="console"></div>
+  <div class="btn-fullscreen-container">
+    <btn id="btn-fullscreen">Full Screen</btn>
   </div>
 
   <script src="libs/tracking.js"></script>

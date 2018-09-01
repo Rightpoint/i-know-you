@@ -8,13 +8,13 @@
 
     var tracker = new tracking.ObjectTracker('face');
     tracker.setInitialScale(4);
-    tracker.setStepSize(2);
+    tracker.setStepSize(0.5);
     tracker.setEdgesDensity(0.1);
-
-    tracking.track('#live-video', tracker, { camera: true });
-
-    var trackerEnabled = true;
     tracker.on('track', handleTrackerEvent);
+    var trackerEnabled = true;
+   
+    var trackerTask = tracking.track(liveVideo, tracker, { camera: true });
+    trackerTask.run();
 
     function handleTrackerEvent(event) {
         if (!trackerEnabled) return;
@@ -42,7 +42,7 @@
             });
 
             // draw snapshot
-            videoSnapshotContext.drawImage(liveVideo, 0, 0, videoOverlay.width, videoOverlay.height);
+            videoSnapshotContext.drawImage(liveVideo, 0, 0, (videoOverlay.width / 3), (videoOverlay.height / 3));
 
             // re-enable tracker after 3 seconds
             log('scheduling tracker in 3 seconds');
@@ -57,10 +57,34 @@
     }
 
     var consoleWindow = document.getElementById('console');
-    function log(message){
+    function log(message) {
         console.log(message);
 
         // log from top down
         consoleWindow.innerHTML = new Date().getTime() + ' - ' + message + '<br />' + consoleWindow.innerHTML;
     }
+
+    var aspectRatio = (1 + (1 / 3));
+    setScreenSize(liveVideo, videoOverlay, videoSnapshot, window.innerHeight, aspectRatio);
+    window.onresize = function () {
+        trackerTask.stop();
+        setScreenSize(liveVideo, videoOverlay, videoSnapshot, window.innerHeight, aspectRatio);
+        videoOverlayContext = videoOverlay.getContext('2d');
+        trackerTask = tracking.track(liveVideo, tracker);
+    }
+
+    var btn = document.getElementById("btn-fullscreen");
+    btn.onclick = function () {
+        liveVideo.webkitRequestFullScreen();
+    }
+
+    function setScreenSize(liveVideo, videoOverlay, videoSnapshot, size, aspectRatio) {
+        liveVideo.setAttribute("height", size);
+        videoOverlay.setAttribute("width", (aspectRatio * size));
+        videoOverlay.setAttribute("height", size);
+        videoSnapshot.setAttribute("width", (aspectRatio * (size / 3)));
+        videoSnapshot.setAttribute("height", size / 3);
+    }
+
+
 }())
