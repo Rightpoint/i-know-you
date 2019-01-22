@@ -1,0 +1,16 @@
+.app {
+  text-align: center;
+  height: 100%;
+}
+
+.tracker {
+  z-index: 0;
+}
+
+.page {
+  z-index: 1;
+  position: absolute;
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+}

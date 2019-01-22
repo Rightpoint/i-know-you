@@ -1,0 +1,13 @@
+#liveVideo, #videoCanvas, #screenshotCanvas {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+#liveVideo {
+  z-index: -2;
+}
+
+#screenshotCanvas {
+  z-index: -1;
+}

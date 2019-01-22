@@ -1,0 +1,27 @@
+.time {
+  color: #DBDBDD;
+  margin-top: 12%;
+  margin-right: 4%;
+  float: right;
+  font-size: 10em;
+  font-family: proxima-nova,sans-serif;
+}
+
+.app-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  margin-bottom: 10px;
+  margin-left: 5px;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

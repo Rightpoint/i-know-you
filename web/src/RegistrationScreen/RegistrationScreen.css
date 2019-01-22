@@ -1,0 +1,13 @@
+.registration {
+  color: white;
+  text-align: left;
+}
+
+.left-col {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.right-col {
+  display: inline-block;
+}
