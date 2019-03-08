@@ -19,7 +19,7 @@ namespace IKnowYouAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[EnableCors("Development")]
+    [EnableCors("Development")]
     public class FaceController : ControllerBase
     {
         private readonly FaceAPIConfiguration _configuration;
